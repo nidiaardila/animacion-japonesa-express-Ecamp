@@ -1,8 +1,11 @@
+import { NotFoundError } from "../error/typesError.js";
+import { Anime } from "../models/Anime.model.js"
 
-export const getAllAnimes = async (req, res) => {
+
+export const getAllAnimes = async(req, res) => {
+    console.log('Función iniciada controller');
     try {
-        const data = await Anime.encontrarTodos();
-
+        const data = await Anime.getAll();
         if(!data) throw new NotFoundError('No existen los datos', `No se encontraron datos solicitados en la ruta`)
 
         res.status(200).json({
@@ -11,8 +14,9 @@ export const getAllAnimes = async (req, res) => {
             data
         })
     } catch (error) {
+        console.log('catch');
         res.status(500).json({
-          message: "Error al obtener los Animes",
+          message: "Error al obtener los Animes ",
           status: 500,
           error,
         });
