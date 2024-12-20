@@ -27,8 +27,9 @@ export const readFile = async (pathData) => {
 
         const data = await fs.readFile(datafilePath, 'utf8')
         return JSON.parse(data)
+        
     } catch (error) {
-        console.error(`No pudemos leer el archivo: ${error}` )
+        console.error(`No se pudp leer el archivo: ${error}` )
         throw new YeisonError("Error al Leer el archivo", error);
     }
 }

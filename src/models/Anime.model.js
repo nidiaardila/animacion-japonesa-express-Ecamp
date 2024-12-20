@@ -1,4 +1,4 @@
-import { getAllData } from '../utils/fileUtils.js';
+import { getAllData, getAnimeById } from '../utils/fileUtils.js';
 
 export class Anime {
     #id;
@@ -54,4 +54,18 @@ export class Anime {
           throw new InternalServerError('Error al obtener los datos de animes', error)
         }
       }
+
+      static async getById(id) {
+        
+        try {
+            console.log('hello estoy en models byId');
+           
+            const anime = await getAnimeById(id, 'anime.json')
+            return anime
+        } catch (error) {
+            throw new NotFoundError('No se encontró el Anime', `No se encontró el anime con el id ${id}`);
+        }
+      }
 }
+
+

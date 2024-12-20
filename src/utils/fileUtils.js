@@ -24,3 +24,16 @@ export const getAllData = async(pathData) => {
         throw new NotFoundError('No pudimos acceder a los datos', error)
     }
 }
+
+export const getAnimeById = async (id, pathData) => {
+    console.log('hello estoy en utils byId');
+    
+    try{
+        const data = await readFile(pathData)
+        const animeFound = data.find(animeFound => animeFound.id === id.toString());
+        console.log('ID recibido:', id);
+        return animeFound
+    } catch (error) {
+        throw new NotFoundError('No se encontró el Anime', `No se encontró el anime con el id ${id}`);
+    }
+}
