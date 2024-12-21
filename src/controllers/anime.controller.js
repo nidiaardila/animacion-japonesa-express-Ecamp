@@ -45,3 +45,18 @@ export const getAnimeById = async(req, res) => {
         });
     }
 }
+
+export const createAnime = async(req, res, next) => {
+   try {
+    const data = req.body
+    const anime = await Anime.create(data);
+
+    res.status(201).json({
+        message: 'Anime creado con exito!',
+        status: 201,
+        data: anime
+    })
+   } catch (error) {
+    next(error)
+   }
+}

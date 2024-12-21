@@ -1,4 +1,6 @@
-import { getAllData, getAnimeById } from '../utils/fileUtils.js';
+import { v4 as uuidv4 } from 'uuid';
+
+import { createDataFile, getAllData, getAnimeById } from '../utils/fileUtils.js';
 
 export class Anime {
     #id;
@@ -7,8 +9,8 @@ export class Anime {
     #anio;
     #autor;
 
-    constructor(id, nombre, genero, anio, autor) {
-        this.#id = id;
+    constructor(nombre, genero, anio, autor) {
+        this.#id = uuidv4();
         this.#nombre = nombre;
         this.#genero = genero;
         this.#anio = anio;
@@ -64,6 +66,19 @@ export class Anime {
             return anime
         } catch (error) {
             throw new NotFoundError('No se encontró el Anime', `No se encontró el anime con el id ${id}`);
+        }
+      }
+
+      static async create(data) {
+        try{
+            const { nombre, genero, anio, autor } = data
+            const anime = new Anime(nombre, genero, anio, autor)
+            const animeObject = anime.getAllProperties()
+
+            await createDataFile(animeObject, 'anime.json')
+            return animeObject
+        }catch{
+            throw new InternalServerError('Error al crear el Anime', error)
         }
       }
 }
