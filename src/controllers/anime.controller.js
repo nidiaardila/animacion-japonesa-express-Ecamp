@@ -60,3 +60,25 @@ export const createAnime = async(req, res, next) => {
     next(error)
    }
 }
+
+export const updateAnime = async(req, res, next) => {
+    try {
+        const { id } = req.params;
+        const dataAnime = req.body;
+
+        const oldAnime = await Anime.update(id, dataAnime);
+
+        res.status(200).json({
+            message: 'Anime actualizado con exito!',
+            status: 200,
+            oldAnime: oldAnime,
+            newAnime: dataAnime
+        })
+    } catch (error) {
+        res.status(500).json({
+          message: "Error al actualizar el anime! ",
+          status: 500,
+          error,
+        });
+   }
+}

@@ -8,7 +8,7 @@
     },
     {
         "id": "2",
-        "nombre": "Dragon Ball",
+        "nombre": "Dragon Ball 2",
         "genero": "Shonen",
         "anio": "1986",
         "autor": "Akira Toriyama"
@@ -40,5 +40,12 @@
         "genero": "Ardila",
         "anio": "2024",
         "autor": "Eros"
+    },
+    {
+        "id": "dbaa272a-5a5f-4fbf-9d5a-2babbb37a7c0",
+        "nombre": "Maria Antonieta",
+        "genero": "Balatine",
+        "anio": "1976",
+        "autor": "Akira Newtwork"
     }
 ]

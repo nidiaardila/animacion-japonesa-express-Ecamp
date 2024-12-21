@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { createDataFile, getAllData, getAnimeById } from '../utils/fileUtils.js';
+import { createDataFile, getAllData, getAnimeById, updateAnime } from '../utils/fileUtils.js';
 
 export class Anime {
     #id;
@@ -79,6 +79,15 @@ export class Anime {
             return animeObject
         }catch{
             throw new InternalServerError('Error al crear el Anime', error)
+        }
+      }
+
+      static async update(id, data) {
+        try{
+            const updatedAnime = await updateAnime(id, data, 'anime.json')
+            return updatedAnime;
+        }catch (error) {
+            throw new InternalServerError('Error al actualizar el anime', error)
         }
       }
 }
