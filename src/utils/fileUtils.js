@@ -61,3 +61,24 @@ export const updateAnime = async (id, newAnime, pathData) => {
         throw new YeisonError('Error al actualizar el anime', error)
     }
 }
+
+export const deleteAnime = async(id, pathData) => {
+    try {
+        const anime = await readFile(pathData);
+        const animeIndex = anime.findIndex(animeFound => animeFound.id === id);
+
+        if(animeIndex === -1) {
+            console.error("No se encontro el Anime")
+            throw new Error("No se encontró el Anime con el ID proporcionado");
+        }
+
+        const animeDelete = anime[animeIndex]
+        anime.splice(animeIndex, 1);
+       
+        await createFile(anime, pathData)
+
+        return animeDelete;
+    } catch (error) {
+        throw new YeisonError('Error al eliminar el anime', error)
+    }
+}

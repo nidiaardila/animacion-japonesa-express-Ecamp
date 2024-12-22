@@ -82,3 +82,24 @@ export const updateAnime = async(req, res, next) => {
         });
    }
 }
+
+export const deleteAnime = async(req, res) => {
+    try {
+        const { id } = req.params;
+
+        const animeDelete = await Anime.delete(id);
+
+
+        res.status(200).json({
+            message: `Anime con id ${id} Borrado con éxito`,
+            status: 200,
+            dataDeleted: animeDelete
+        })
+    } catch (error) {
+        res.status(500).json({
+          message: "Error al Eliminar el Anime",
+          status: 500,
+          error,
+        });
+    }
+}

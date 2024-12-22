@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { createDataFile, getAllData, getAnimeById, updateAnime } from '../utils/fileUtils.js';
+import { createDataFile, getAllData, getAnimeById, updateAnime, deleteAnime} from '../utils/fileUtils.js';
 
 export class Anime {
     #id;
@@ -88,6 +88,15 @@ export class Anime {
             return updatedAnime;
         }catch (error) {
             throw new InternalServerError('Error al actualizar el anime', error)
+        }
+      }
+
+      static async delete(id) {
+        try {
+            const animeDelete = await deleteAnime(id, 'anime.json');
+            return animeDelete;
+        } catch (error) {
+            throw new InternalServerError('Error al eliminar el anime', error)
         }
       }
 }
